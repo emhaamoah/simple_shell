@@ -1,176 +1,125 @@
-# Simple Shell Project
+<h1 align ="center"> _SHELL() </h1><br>
 
-**A simple Unix command line interpreter**
-![shell](/shell.png)
+## Table of Contents 
+---
+- [Authors](#authors)
+- [Introduction](#introduction)
+- [Description](#description)
+- [Installation](#installation)
+- [Test](#Test)
+- [Files](#files)
+- [Features](#features)
+- [Built With](#built-with)
+- [Acknowledgments](#acknowledgments)
 
-****
-## Table of contents
- - **What is the shell?**
- - **About this project**
- - **Essential Functionalities of the Simple Shell**
- - **File description**
- - **List of allowed functions and system calls for this project**
- - **USAGE**
- - **Example of Usage**
- - **Bugs**
- - **TEAM**
- ****
+---
 
-## What is the shell?
-The shell is a program that takes commands from the keyboard via the terminal, and gives them to the operating system to perform.\
-**To better understand how the shell actually works, you can read our [Article].**
 
-## About this project
-This project is a simple version of the linux shell made for [Holberton School] taking part of the "Low-level programming & Algorithm - Linux and Unix system programming" projects.\
-It is created using the **C programming Language** and it can do many functionalities that a real shell does.
+---
+## Introduction
+> Project for the end of the first trimester at Holberton School. This project is for us to show what we have learnt in C during these 3 months, the use of loops, conditional, macros, structures, variables, pointers and more, also to test our teamwork skills and our work under pressure.
 
-## Essential Functionalities of the Simple Shell:
-> Displays a prompt "#cisfun$ " and waits for user input.\
-> Runs all commands of type "executable program" (ls and /bin/ls).\
-> Runs the following build_in commands: **exit**, **env**, **setenv** and **unsetenv**.\
-> Handles commands with arguments.\
-> Handles the PATH global variable.\
-> Handles The EOF (End Of File) condition.\
-> Handles the Ctrl + C signal -> It doesn't exit the shell
+---
+## Description
+The shell() compatible command language interpreter that executes commands read from the standard input or from a file.
 
-## Files description
- - **AUTHORS** -> List of contributors to this repository
- - **man_1_simple_shell** -> Manual page for the simple_shell
- - **shell.h** -> Header file
- - **shell.c** -> main function
-	- **sig_handler** -> handles the Ctrl + C signal
-	- **_EOF** -> handles the End Of File condition
- - **string.c**
-	- **_putchar** -> prints a character
-	- **_puts** -> prints a string
-	- **_strlen** -> gives the length of a string
-	- **_strdup** -> copies a string in a newly allocated memory
-	- **concat_all** -> concatenates 3 strings in a newly allocated memory
- - **line_exec.c**
-	- **splitstring** -> splits a string into an array of words
-	- **execute** -> executes a command using execve
-	- **realloc** -> reallocates a memory block
-	- **freearv** -> frees a 2 dimensional array
- - **linkpath.c**
-	- **_getenv** -> returns the value of a global variable
-	- **add_node_end** -> adds a node in a singly linked list
-	- **linkpath** -> creates a singly linked list for PATH directories
-	- **_which** -> finds the pathname of a command
-	- **free_list** -> frees the linked list of PATH value
- - **checkbuild.c**
-	- **checkbuild** -> checks if a command is a build-in command
- - **buildin.c**
-	- **exitt** -> handles the exit buildin command
-	- **_atoi** -> converts a string into an integer
-	- **env** -> prints the current environment
-	- **_setenv** -> Initialize a new global variable, or modify an existing one
-	- **_unsetenv** -> remove a global variable
+---
+## Installation 
+In order to run the shell command interpreter, you must install it in your repository by cloning the following (shown below) in your machine running:
+```
+git clone https://github.com/shincap8/simple_shell.git
+```
+---
+## Test
+- In order to compile the function you must run the following line in your shell:
+```
+gcc -Wall -Werror -Wextra -pedantic *.c *.h -o hsh
+```
+_Note_: there are two ways of using the command interpreter:
 
-****
-## List of allowed functions and system calls for this project
- - access (man 2 access)
- - chdir (man 2 chdir)
- - close (man 2 close)
- - closedir (man 3 closedir)
- - execve (man 2 execve)
- - exit (man 3 exit)
- - _exit (man 2 _exit)
- - fflush (man 3 fflush)
- - fork (man 2 fork)
- - free (man 3 free)
- - getcwd (man 3 getcwd)
- - getline (man 3 getline)
- - isatty (man 3 isatty)
- - kill (man 2 kill)
- - malloc (man 3 malloc)
- - open (man 2 open)
- - opendir (man 3 opendir)
- - perror (man 3 perror)
- - read (man 2 read)
- - readdir (man 3 readdir)
- - signal (man 2 signal)
- - stat (__xstat) (man 2 stat)
- - lstat (__lxstat) (man 2 lstat)
- - fstat (__fxstat) (man 2 fstat)
- - strtok (man 3 strtok)
- - wait (man 2 wait)
- - waitpid (man 2 waitpid)
- - wait3 (man 2 wait3)
- - wait4 (man 2 wait4)
- - write (man 2 write)
-****
+#### Interactive mode:
+```
+ $ ./hsh
+($) /bin/ls
+hsh main.c shell.c
+($)
+($) exit
+$
+```
+#### Non-interactive mode:
+```
+$ echo "/bin/ls" | ./hsh
+hsh main.c shell.c test_ls_2
+$
+$ cat test_ls_2
+/bin/ls
+/bin/ls
+$
+$ cat test_ls_2 | ./hsh
+hsh main.c shell.c test_ls_2
+hsh main.c shell.c test_ls_2
+$
+```
+---
+## Files
+- To read the manual you man run:
+```man ./[FILE]``` taking into account the structure, for our case it would be ```man ./man_1_simple_shell```
 
-## USAGE
-You can try our shell by following these steps:
-> **Step 1:** Clone our repository using this command, (you need to have git installed on your machine first)
-````
-git clone https://github.com/MatriMariem/simple_shell
-````
-> **Step 2:** Change directory to simple_shell:
-````
-cd simple_shell
-````
-> **Step 3:** Compile the C files in this way:
-````
-gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
-````
-> **Step 4:** Run the shell
-````
-./hsh
-````
-**Exiting the shell**
-When you want to exit the shell, you can use one of the following methods:
-> **1: Type the command "exit"**
-````
-exit
-````
-> **2: Press on Ctrl + D**
+| File Name | Description and contents |
+| --- | --- |
+| [manpage](man_1_simple_shell) | This is the manpage for the shell command, this will help us know how to use the shell and the many uses of it, in here we can find examples and the correct sintaxis of the commands.|
+| [_library.h](library.h) |This is the headers file where we can find all the prototypes of our functions and the structures used.|
+| [_stdio.c](_stdio.c) |In here we have the puts and putchar function it is used to print characters.|
+| [_stdlib.c](_stdlib.c) |In here we have the atoi function it is used to make integers into characters, the alloc funcction to allocate memory and the freeall function to free the memory allocated when it is not needed anymore.|
+| [_string_0.c](_string_0.c) |Here we can find the function _strtok that splits a string with a delimiter given, _strcat function that concatenates two strings given, _strncmp compares an amount of characters, _strlen counts the characters in a string and _strdup to duplicate strings.|
+| [_string_1.c](_string_1.c) |Here we can find the function _strchr that looks for a character in a string and returns a pointer after the match.|
+| [additionalFunctions_0.c](additionalFunctions_0.c) |Here we find the function cantCmds that counts commands, parse function that divide a string in different parts, constructor function who calls the execute, print number who prints numbers, execute that executes the command given.|
+| [additionalFunctions_1.c](additionalFunctions_1.c) |Here we find the function findpath that looks for the path where the command can be executed, path_concat function that concatenate the path and the command, path_copy function copies the path, help_me this function prints the help for every builtin.|
+| [builtinsFunctions.c](builtinsFunctions.c) |Here we find the function exitF that allows the user to exit, path_concat function that concatenate the path and the command, path_copy function copies the path, help_me this function prints the help for every builtin, unsetF this function is to unset the environment, help function is the one who manage the help print.|
+| [generate-authors.sh](generate-authors.sh) |This script generate the authors file. |
+| [helpFunctions.c](helpFunctions.c) |This file has the messages for the builtin help. |
+| [main.c](main.c) |This function has the launch function who starts all the process, the builtin function who calls the builtins, the issame function who compares two strings and the issignals this function is to catch a special key. |
 
-## Example of Usage
-````
-ubunto@ubuntu:~/Bureau/simple_shell$ gcc -Wall -Wextra -Werror -pedantic *.c -o hsh
-ubunto@ubuntu:~/Bureau/simple_shell$ ./hsh
-#cisfun$ echo Hello, This is an example
-Hello, This is an example
-#cisfun$ ls
-README.md  checkbuild.c  line_exec.c  shell.c  string.c
-buildin.c  hsh		 linkpath.c   shell.h
-#cisfun$ ^C
-#cisfun$ ls -l
-total 52
--rw-r--r-- 1 ubunto ubunto  3067 Nov 26 04:22 README.md
--rw-r--r-- 1 ubunto ubunto  2183 Nov 24 16:17 buildin.c
--rw-r--r-- 1 ubunto ubunto   574 Nov 24 15:59 checkbuild.c
--rwxr-xr-x 1 ubunto ubunto 18144 Nov 26 04:22 hsh
--rw-r--r-- 1 ubunto ubunto  2091 Nov 24 14:49 line_exec.c
--rw-r--r-- 1 ubunto ubunto  1926 Nov 24 14:30 linkpath.c
--rw-r--r-- 1 ubunto ubunto   951 Nov 24 16:09 shell.c
--rw-r--r-- 1 ubunto ubunto  1351 Nov 24 15:58 shell.h
--rw-r--r-- 1 ubunto ubunto  1727 Nov 24 14:30 string.c
-#cisfun$ exit
-ubunto@ubuntu:~/Bureau/simple_shell$
-````
-## Bugs
-No known Bugs.
+---
+## Features 
 
-## TEAM
-Chokri Inès  : [LinkedIn/inès] | [GitHub/inès] | [Twitter/inès]\
-Matri Mariem : [LinkedIn/mariem] | [GitHub/mariem] | [Twitter/mariem]
+A simple shell must work with the path and without the path
+* /bin/ls
+* ls
+* env "this must print the environment"
+* help "this must print the help"
+* exit "let you exit the shell"
+* unsetenv "remove an environment variable"
 
-[Article]: <https://www.linkedin.com/pulse/what-really-happens-when-you-type-ls-l-shell-mariem-matri/>
-[Holberton School]: <https://www.holbertonschool.com>
-[LinkedIn/inès]: <https://www.linkedin.com/in/in%C3%A8s-chokri-b247b7175>
-[LinkedIn/mariem]: <https://www.linkedin.com/in/mariem-matri-249620178>
-[GitHub/inès]: <https://github.com/CutiePizza>
-[GitHub/mariem]: <https://github.com/MatriMariem>
-[Twitter/inès]: <https://twitter.com/chokri_ines>
-[Twitter/mariem]: <https://twitter.com/MatriMariem>
+---
+### Examples of use
 
-## AUTHOR DESCRIPTION (Mariem Matri)
- - I'm a Food Process Engineer and a software engineering student at Holberton School.
-  - I have been studying low-level programming, high-level
- programming, system engineering and devops, and web
- stack programming (Front-end & Back-end) using a
- methodology based on peer-learning and projects.
-  - I'm curious, adaptable, a fast learner and I love developing
- my skills.
+Below you can find use of some commands.
+
+```
+$ ls -a
+$ echo Hola
+$ pwd
+```
+Here are the result of this actions:
+
+```
+> ls -a
+.   additionalFunctions_0.c  AUTHORS              .git             hsh        main.c              README.md  _stdlib.c   _string_1.c
+..  additionalFunctions_1.c  builtinsFunctions.c  helpFunctions.c  library.h  man_1_simple_shell  _stdio.c   _string_0.c
+> echo hola
+hola
+> pwd
+/home/vagrant/hbn/simple_shell
+> exit
+```
+
+
+## Built With
+
+* [C](https://en.wikipedia.org/wiki/C_(programming_language))
+* [Vim](https://https://en.wikipedia.org/wiki/Vim_(text_editor)/)
+* [Vagrant](https://www.vagrantup.com/)
+* [Peppermint](https://www.osboxes.org/peppermint/) Need to change to what Kevin is using
+* [Ubuntu](https://www.ubuntu.com/)
+* [GCC 4.8.4 Compiler](https://gcc.gnu.org/)
