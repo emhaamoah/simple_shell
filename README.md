@@ -1,125 +1,116 @@
-<h1 align ="center"> _SHELL() </h1><br>
+# 0x16. C - Simple Shell
+ **By Spencer Cheng, featuring Julien Barbier**
+ Project to be done in teams of 2 people (your team: Godswill Kalu, Vatalis Ibeh)
 
-## Table of Contents 
----
-- [Authors](#authors)
-- [Introduction](#introduction)
-- [Description](#description)
-- [Installation](#installation)
-- [Test](#Test)
-- [Files](#files)
-- [Features](#features)
-- [Built With](#built-with)
-- [Acknowledgments](#acknowledgments)
+# Learning Objectives
+At the end of this project, you are expected to be able to explain to anyone, without the help of Google:
 
----
+# General
+Who designed and implemented the original Unix operating system
+Who wrote the first version of the UNIX shell
+Who invented the B programming language (the direct predecessor to the C programming language)
+Who is Ken Thompson
+How does a shell work
+What is a pid and a ppid
+How to manipulate the environment of the current process
+What is the difference between a function and a system call
+How to create processes
+What are the three prototypes of main
+How does the shell use the PATH to find the programs
+How to execute another program with the execve system call
+How to suspend the execution of a process until one of its children terminates
+What is EOF / “end-of-file”?
+# Requirements
+#  General
+Allowed editors: vi, vim, emacs
+All your files will be compiled on Ubuntu 20.04 LTS using gcc, using the options -Wall -Werror -Wextra -pedantic -std=gnu89
+All your files should end with a new line
+A README.md file, at the root of the folder of the project is mandatory
+Your code should use the Betty style. It will be checked using betty-style.pl and betty-doc.pl
+Your shell should not have any memory leaks
+No more than 5 functions per file
+All your header files should be include guarded
+Use system calls only when you need to (why?)
+# GitHub
+*There should be one project repository per group. If you and your partner have a repository with the same name in both your accounts, you risk a 0% score. Add your partner as a collaborator. *
 
+More Info
+Output
+Unless specified otherwise, your program must have the exact same output as sh (/bin/sh) as well as the exact same error output.
+The only difference is when you print an error, the name of the program must be equivalent to your argv[0] (See below)
+Example of error with sh:
 
----
-## Introduction
-> Project for the end of the first trimester at Holberton School. This project is for us to show what we have learnt in C during these 3 months, the use of loops, conditional, macros, structures, variables, pointers and more, also to test our teamwork skills and our work under pressure.
-
----
-## Description
-The shell() compatible command language interpreter that executes commands read from the standard input or from a file.
-
----
-## Installation 
-In order to run the shell command interpreter, you must install it in your repository by cloning the following (shown below) in your machine running:
-```
-git clone https://github.com/shincap8/simple_shell.git
-```
----
-## Test
-- In order to compile the function you must run the following line in your shell:
-```
-gcc -Wall -Werror -Wextra -pedantic *.c *.h -o hsh
-```
-_Note_: there are two ways of using the command interpreter:
-
-#### Interactive mode:
-```
- $ ./hsh
-($) /bin/ls
-hsh main.c shell.c
-($)
-($) exit
+$ echo "qwerty" | /bin/sh
+/bin/sh: 1: qwerty: not found
+$ echo "qwerty" | /bin/../bin/sh
+/bin/../bin/sh: 1: qwerty: not found
 $
-```
-#### Non-interactive mode:
-```
-$ echo "/bin/ls" | ./hsh
-hsh main.c shell.c test_ls_2
+Same error with your program hsh:
+
+$ echo "qwerty" | ./hsh
+./hsh: 1: qwerty: not found
+$ echo "qwerty" | ./././hsh
+./././hsh: 1: qwerty: not found
 $
-$ cat test_ls_2
-/bin/ls
-/bin/ls
-$
-$ cat test_ls_2 | ./hsh
-hsh main.c shell.c test_ls_2
-hsh main.c shell.c test_ls_2
-$
+
+# List of allowed functions and system calls
+access (man 2 access)
+chdir (man 2 chdir)
+close (man 2 close)
+closedir (man 3 closedir)
+execve (man 2 execve)
+exit (man 3 exit)
+_exit (man 2 _exit)
+fflush (man 3 fflush)
+fork (man 2 fork)
+free (man 3 free)
+getcwd (man 3 getcwd)
+getline (man 3 getline)
+getpid (man 2 getpid)
+isatty (man 3 isatty)
+kill (man 2 kill)
+malloc (man 3 malloc)
+open (man 2 open)
+opendir (man 3 opendir)
+perror (man 3 perror)
+read (man 2 read)
+readdir (man 3 readdir)
+signal (man 2 signal)
+stat (__xstat) (man 2 stat)
+lstat (__lxstat) (man 2 lstat)
+fstat (__fxstat) (man 2 fstat)
+strtok (man 3 strtok)
+wait (man 2 wait)
+waitpid (man 2 waitpid)
+wait3 (man 2 wait3)
+wait4 (man 2 wait4)
+write (man 2 write)
+
+# Compilation
+## Your shell will be compiled this way:
+
+`gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh`
+
+
+# files
+- README.md - description about the project repo
+- man_1_simple_shell - is the man page for the shell we are going to write.
+- AUTHORS - file at the  root of your repository, listing all individuals having contributed content to the repository. 
+- main.h - is the header file which contains the standared header file and prototype of o function used in the program.
+- main.c - initialize the program with infinite loop by call the prompt function
+- prompt.c - it use getline system call to read the input from the user and run infinite loop with fork to keep prompt going.
+- special_character - It identiies if the special inputs such as if the frist input is slash,the user typed exit or env...
+- string.c -it handles the strings(string length, write string,find string in directory,concatane strings....)
+- cmd.c - it finds the command the user entered.
+- execute.c - execute the command.
+
+## How to add Author file
+`Bash script for generating the list of authors in git repo`
 ```
----
-## Files
-- To read the manual you man run:
-```man ./[FILE]``` taking into account the structure, for our case it would be ```man ./man_1_simple_shell```
+#!/bin/sh
 
-| File Name | Description and contents |
-| --- | --- |
-| [manpage](man_1_simple_shell) | This is the manpage for the shell command, this will help us know how to use the shell and the many uses of it, in here we can find examples and the correct sintaxis of the commands.|
-| [_library.h](library.h) |This is the headers file where we can find all the prototypes of our functions and the structures used.|
-| [_stdio.c](_stdio.c) |In here we have the puts and putchar function it is used to print characters.|
-| [_stdlib.c](_stdlib.c) |In here we have the atoi function it is used to make integers into characters, the alloc funcction to allocate memory and the freeall function to free the memory allocated when it is not needed anymore.|
-| [_string_0.c](_string_0.c) |Here we can find the function _strtok that splits a string with a delimiter given, _strcat function that concatenates two strings given, _strncmp compares an amount of characters, _strlen counts the characters in a string and _strdup to duplicate strings.|
-| [_string_1.c](_string_1.c) |Here we can find the function _strchr that looks for a character in a string and returns a pointer after the match.|
-| [additionalFunctions_0.c](additionalFunctions_0.c) |Here we find the function cantCmds that counts commands, parse function that divide a string in different parts, constructor function who calls the execute, print number who prints numbers, execute that executes the command given.|
-| [additionalFunctions_1.c](additionalFunctions_1.c) |Here we find the function findpath that looks for the path where the command can be executed, path_concat function that concatenate the path and the command, path_copy function copies the path, help_me this function prints the help for every builtin.|
-| [builtinsFunctions.c](builtinsFunctions.c) |Here we find the function exitF that allows the user to exit, path_concat function that concatenate the path and the command, path_copy function copies the path, help_me this function prints the help for every builtin, unsetF this function is to unset the environment, help function is the one who manage the help print.|
-| [generate-authors.sh](generate-authors.sh) |This script generate the authors file. |
-| [helpFunctions.c](helpFunctions.c) |This file has the messages for the builtin help. |
-| [main.c](main.c) |This function has the launch function who starts all the process, the builtin function who calls the builtins, the issame function who compares two strings and the issignals this function is to catch a special key. |
-
----
-## Features 
-
-A simple shell must work with the path and without the path
-* /bin/ls
-* ls
-* env "this must print the environment"
-* help "this must print the help"
-* exit "let you exit the shell"
-* unsetenv "remove an environment variable"
-
----
-### Examples of use
-
-Below you can find use of some commands.
-
-```
-$ ls -a
-$ echo Hola
-$ pwd
-```
-Here are the result of this actions:
-
-```
-> ls -a
-.   additionalFunctions_0.c  AUTHORS              .git             hsh        main.c              README.md  _stdlib.c   _string_1.c
-..  additionalFunctions_1.c  builtinsFunctions.c  helpFunctions.c  library.h  man_1_simple_shell  _stdio.c   _string_0.c
-> echo hola
-hola
-> pwd
-/home/vagrant/hbn/simple_shell
-> exit
-```
-
-
-## Built With
-
-* [C](https://en.wikipedia.org/wiki/C_(programming_language))
-* [Vim](https://https://en.wikipedia.org/wiki/Vim_(text_editor)/)
-* [Vagrant](https://www.vagrantup.com/)
-* [Peppermint](https://www.osboxes.org/peppermint/) Need to change to what Kevin is using
-* [Ubuntu](https://www.ubuntu.com/)
-* [GCC 4.8.4 Compiler](https://gcc.gnu.org/)
+git shortlog -se \
+  | perl -spe 's/^\s+\d+\s+//' \
+  | sed -e '/^CommitSyncScript.*$/d' \
+  > AUTHORS
+  ```
